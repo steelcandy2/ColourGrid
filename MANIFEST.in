@@ -1,0 +1,11 @@
+# Other files to be included in the distributable version of this
+# application.
+#
+# Note: these files will only be included if the setuptools.setup() call (in
+# setup.py) is passed the argument 'include_package_data = True'.
+#
+# Copyright (C) 2022 by James MacKay.
+#
+
+# So that 'make install' can be used to install the application.
+include Makefile

@@ -1,0 +1,139 @@
+#+title: ColourGrid
+#+date: <2022-06-06 Mon 16:38>
+#+description: README file for the 'ColourGrid' Flask web application.
+#+OPTIONS: toc:nil num:nil date:nil
+#+OPTIONS: org-use-sub-superscripts:nil
+
+=ColourGrid= is a small Flask web application for choosing RGB colours
+suitable for use in things like CSS stylesheets and HTML pages.
+
+Initially you're shown a grid of various colours from which you can select
+the one closest to your desired colour by clicking on it. (If you hover over
+a colour you'll see two characters — one black and one white — appear in that
+colour's cell. You can use them to get an idea of what the colour would look
+like as a background colour behind black or white text.)
+
+Once you've clicked on that first colour you'll be shown another grid of the
+same size containing colours that are fairly close to the one that you
+initially selected. Click on the one closest to your desired colour and
+you'll be shown a final, smaller grid of colours that are very close to the
+one that you selected in the previous grid. Unless you have a good eye and
+screen all of the colours in this grid may look to be the same, in which case
+you may want to just pick one at random, or one that corresponds to an RGB
+value that you like.
+
+After clicking on a colour in that final, smaller grid you'll be returned to
+the initial screen, but this time in the top right-hand corner you'll see
+something like this:
+
+#+begin_example
+Last colour selected: #6AE4DE
+#+end_example
+
+The sequence of letters and digits starting with the =#= is the hexadecimal
+representation of the colour that you selected from the previous grid,
+suitable for copying into a CSS stylesheet or HTML page. This information
+will disappear once you choose another colour from a grid, so you should
+select it and copy it elsewhere if you want to save it.
+
+At any time you can click the 'reverse' link in the bottom right-hand side of
+a page to toggle the page's background between black and white. (Once you
+change the background colour on a page it will be used as the background
+colour on all subsequent pages until you click a 'reverse' link again.)
+Changing the background colour may make it easier to determine a colour's
+suitability as a foreground colour for use against a lighter or darker
+background.
+
+
+** Installation
+
+=ColourGrid='s only external dependency (other than Python 3) is the [[https://palletsprojects.com/p/flask][Flask]]
+web framework, so if you happen to already have that installed then you
+should be able to run this application directly from a local copy of its
+=git= repository. When in a shell whose current directory is the root
+directory of that local copy, running
+
+#+begin_src sh
+./colours.py
+#+end_src
+
+will start the application so that it listens on the default port of =5000=.
+So visiting http://localhost:5000/ with your web browser will let you start
+selecting colours. If you want to use a different port (perhaps because that
+default one is already in use) then you can specify the port to use as a
+command line argument. For example, if you run
+
+#+begin_src sh
+./colours.py 8421
+#+end_src
+
+then visiting http://localhost:8421/ will let you select a colour.
+
+If you don't have Flask installed (which is likely to be the case for most
+people), then installation is a little more complicated, but only a little.
+We'll assume that you're in a shell whose current directory is the root
+directory of your local copy of this =git= repository, and that you want to
+install =ColourGrid= in a directory =~/some/directory=. Then you can enter
+the following sequence of commands
+
+#+begin_src
+mkdir -p ~/some/directory
+cp -piv Makefile colours.py ~/some/directory
+cd ~/some/directory
+make install
+source venv/bin/activate
+#+end_src
+
+which will leave =~/some/directory= as your new current directory. You can
+then run the application from there by running =./colours.py= as described
+above.
+
+The next includes instructions on how to install =ColourGrid= using a
+packaged version of the application.
+
+
+** Packaging
+
+Although =ColourGrid= is a very small application — almost all of its
+functionality is in the single =colours.py= file — it's still possible to
+package it up so that it can be distributed to and installed by someone that
+doesn't have a local copy of its =git= repository.
+
+You do need a local copy to create the packaged version of this application,
+though. Assuming that you're at a shell prompt whose current directory is the
+root directory of that local copy, you can run the command
+
+#+begin_src sh
+make
+#+end_src
+
+and, assuming that it's successful, a subdirectory named =dist= will have
+been created, and it will contain a file named =ColourGrid-1.0.tar.gz=. If
+that's the case then congratulations, you've successfully built a packaged
+version of =ColourGrid=!
+
+Installing from it is a little different from what was shown above, but it's
+still reasonably straightforward. Let's again assume that you want to install
+=ColourGrid= under a directory with pathname =~/some/directory=. (It will get
+installed in a subdirectory of that directory, not directly in that
+directory.) then copy =ColourGrid-1.0.tar.gz= into that directory and extract
+its contents by running the commands
+
+#+begin_src sh
+cd ~/some/directory
+tar xvf ColourGrid-1.0.tar.gz
+#+end_src
+
+Among other things this will create the =~/some/directory/ColourGrid-1.0=
+subdirectory that the application will be installed in. To complete the
+installation run the foillowing commands:
+
+#+begin_src sh
+cd ColourGrid-1.0
+make install
+source venv/bin/activate
+#+end_src
+
+Then, as described above, you can start the application by running
+=./colours.py= and then visiting http://localhost:5000/ to start selecting
+colours.
