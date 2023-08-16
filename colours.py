@@ -88,7 +88,7 @@ _reverseColoursArgValue = "1"
 
 def output(w, fmt, *args):
     """
-    Outputs to to the output stream 'w' the message constructed from the
+    Outputs to the output stream 'w' the message constructed from the
     format string 'fmt' and any and all arguments 'args'.
     """
     assert w is not None
