@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python3
 ## A small web application for selecting a 24-bit RGB colour value by
 ## selecting one from a grid of colours and then refining it by selecting one
 ## close to it from (two) successive grids.
